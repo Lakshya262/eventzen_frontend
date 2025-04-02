@@ -1,0 +1,94 @@
+.admin-dashboard {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+  }
+  
+  .admin-dashboard h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .admin-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .admin-controls button {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .admin-controls button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    width: 80%;
+    max-width: 1400px;
+    margin-bottom: 60px;
+  }
+  
+  .admin-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .admin-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+  
+  .stats-overview {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .stat-card h4 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+  }
+  
+  .stat-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }

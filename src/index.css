@@ -1,0 +1,22 @@
+:root {
+  --primary-color: #d5ed86;
+  --secondary-color: #2B303A;
+  --bg-color: #11122b;
+  --accent-color: #A09ABC;
+  --button-hover: #E1DEE9;
+}
+
+body {
+  font-family: "Lexend", sans-serif;
+  background: linear-gradient(135deg, var(--secondary-color), var(--bg-color));
+  margin: 0;
+  padding: 0;
+  color: var(--accent-color);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

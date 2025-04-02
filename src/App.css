@@ -1,0 +1,116 @@
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 60px); 
+  text-align: center;
+}
+
+
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo {
+  max-width: 350px;
+  height: auto;
+}
+
+/* Buttons Container */
+.auth-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.button, 
+.login-container button,
+.register-container button {  
+  background: var(--primary-color);
+  color: #312b8d;
+  font-size: 1.2rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+/* Button Hover Effect */
+.button:hover, 
+.login-container button:hover,
+.register-container button:hover {  
+  background: var(--button-hover);
+  transform: scale(1.1);
+}
+
+
+/* Login & Register Page Styling */
+.login-container, 
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Form Container */
+.login-container form, 
+.register-container form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Input Fields Styling */
+.login-container input, 
+.register-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+/* Input Focus Effect */
+.login-container input:focus, 
+.register-container input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container form, 
+  .register-container form {
+    width: 90%;
+  }
+}
