@@ -1,36 +1,57 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import AdminDashboard from "./Modules/admin/AdminDashboard";
-import CustomerDashboard from "./Modules/customer/CustomerDashboard";
-import ManageProfile from "./Pages/ManageProfile";
-import AuthGuard from "./Components/AuthGuard";
-import NavBar from "./Components/NavBar";
-import EventsList from "./Pages/EventsList"; 
-import AdminBookings from "./Modules/admin/AdminBookings"; 
-import "./App.css";
+import { Routes, Route } from 'react-router-dom';
+import Home from "./Page/Home";
+import Login from "./Page/Login";
+import Register from "./Page/Register";
+import EventsList from './Components/Pages/EventList/EventsList';
+import AdminDashboard from './Modules/admin/AdminDashboard';
+import ManageEvents from './Modules/admin/ManageEvents';
+import EventBookings from './Modules/admin/EventBookings';
+import CustomerDashboard from './Modules/customer/CustomerDashboard'; // Assuming this file exists
+import ManageProfile from './Components/ManageProfile/ManageProfile';
+import AuthGuard from './Components/AuthGuard';
+import Navigation from './Components/Navigation/Navigation';
 
 function App() {
   return (
     <div className="app">
-      <NavBar />
-      <div className="content">
+      <Navigation />
+      <main className="content">
         <Routes>
+          {/* Public Routes (No AuthGuard) */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/events" element={<EventsList />} />
-          
-          <Route
-            path="/admin-dashboard"
-            element={
-              <AuthGuard requiredRole="ADMIN">
-                <AdminDashboard />
-              </AuthGuard>
-            }
-          />
-          
+
+          {/* Admin Routes (Protected) */}
+          <Route path="/admin">
+            <Route
+              path="dashboard"
+              element={
+                <AuthGuard requiredRole="ADMIN">
+                  <AdminDashboard />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="events"
+              element={
+                <AuthGuard requiredRole="ADMIN">
+                  <ManageEvents />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="events/:eventId/bookings"
+              element={
+                <AuthGuard requiredRole="ADMIN">
+                  <EventBookings />
+                </AuthGuard>
+              }
+            />
+          </Route>
+
+          {/* Customer Routes (Protected) */}
           <Route
             path="/customer-dashboard"
             element={
@@ -39,7 +60,8 @@ function App() {
               </AuthGuard>
             }
           />
-          
+
+          {/* Shared Protected Route */}
           <Route
             path="/manage-profile"
             element={
@@ -48,19 +70,9 @@ function App() {
               </AuthGuard>
             }
           />
-          
-          <Route
-            path="/admin/events/:eventId/bookings"
-            element={
-              <AuthGuard requiredRole="ADMIN">
-                <AdminBookings />
-              </AuthGuard>
-            }
-          />
         </Routes>
-      </div>
+      </main>
     </div>
   );
 }
-
 export default App;

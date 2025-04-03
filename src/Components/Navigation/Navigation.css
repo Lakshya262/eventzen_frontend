@@ -1,0 +1,89 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, var(--secondary-color), var(--bg-color));
+  padding: 12px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Centered nav links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--accent-color);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* User Section */
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-message {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Logo Size */
+.navbar-logo {
+  height: 32px;  
+  width: auto;
+}
+
+/* Logout Button */
+.logout-button {
+  background: red; 
+  color: black; 
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background: darkred;  
+  transform: scale(1.05);
+}

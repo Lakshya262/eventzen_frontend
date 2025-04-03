@@ -1,0 +1,40 @@
+/* Events List Container */
+.events-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Events Grid */
+.events-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--error-color);
+}
+
+/* No Events State */
+.no-events {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 40px;
+  color: var(--accent-color);
+}

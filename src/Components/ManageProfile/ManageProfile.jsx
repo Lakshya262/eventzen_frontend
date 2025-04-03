@@ -13,7 +13,7 @@ function ManageProfile() {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        // In your ManageProfile.jsx
+       
         if (!token) {
           setError("No authentication token found. Please log in.");
           setLoading(false);
@@ -26,7 +26,7 @@ function ManageProfile() {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-            withCredentials: true, // Ensure cookies are sent if required
+            withCredentials: true,
           });
           setUser(response.data);
         } catch (err) {

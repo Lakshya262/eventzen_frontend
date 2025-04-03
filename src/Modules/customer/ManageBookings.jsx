@@ -34,7 +34,7 @@ const ManageBookings = () => {
     try {
       if (window.confirm("Are you sure you want to cancel this booking?")) {
         await eventService.cancelBooking(bookingId);
-        // Refresh bookings after cancellation
+        
         const userId = localStorage.getItem("userId");
         const updatedBookings = await eventService.getUserBookings(userId);
         setBookings(updatedBookings);

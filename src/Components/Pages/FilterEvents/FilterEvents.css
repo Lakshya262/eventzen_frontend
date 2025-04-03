@@ -1,0 +1,39 @@
+/* Filter Events Container */
+.filter-events-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+}
+
+/* Input Field */
+.filter-events-input {
+  padding: 10px;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Filter Button */
+.filter-events-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filter-events-button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filter-events-container {
+    padding: 15px;
+  }
+}

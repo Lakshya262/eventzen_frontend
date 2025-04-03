@@ -1,5 +1,3 @@
-import authService from "./authService";
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = {
@@ -8,7 +6,8 @@ const api = {
       headers: {
         "Content-Type": "application/json",
         ...authService.getAuthHeader()
-      }
+      },
+      credentials: 'include' 
     });
     return handleResponse(response);
   },
@@ -20,7 +19,8 @@ const api = {
         "Content-Type": "application/json",
         ...authService.getAuthHeader()
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      credentials: 'include'
     });
     return handleResponse(response);
   },
@@ -32,7 +32,8 @@ const api = {
         "Content-Type": "application/json",
         ...authService.getAuthHeader()
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      credentials: 'include'
     });
     return handleResponse(response);
   },
@@ -43,17 +44,26 @@ const api = {
       headers: {
         "Content-Type": "application/json",
         ...authService.getAuthHeader()
-      }
+      },
+      credentials: 'include'
     });
     return handleResponse(response);
   }
 };
 
 const handleResponse = async (response) => {
-  const data = await response.json();
+  const contentType = response.headers.get('content-type');
+  const data = contentType?.includes('application/json') 
+    ? await response.json() 
+    : await response.text();
+
   if (!response.ok) {
-    throw new Error(data.message || "Something went wrong");
+    const error = new Error(data.message || 'Something went wrong');
+    error.response = response;
+    error.data = data;
+    throw error;
   }
+
   return data;
 };
 

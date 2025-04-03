@@ -1,6 +1,6 @@
-import NavBar from "../../Components/NavBar";
-import EventCard from "../../Components/EventCard";
-import "./styles/AdminDashboard.css";
+import Navigation from "../../Components/Navigation/Navigation";
+import EventCard from "../../Components/EventCard/EventCard";
+import "./AdminDashboard.css";
 
 function AdminDashboard() {
   const events = [
@@ -10,7 +10,7 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-      <NavBar role="admin" />
+      <Navigation role="admin" />
       <h1>Admin Dashboard</h1>
       <div className="event-list">
         {events.map((event, index) => (
