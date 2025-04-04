@@ -1,12 +1,18 @@
 import API from './api';
 
+console.log('eventServices.js loaded'); // Debug log
+
 export const getEvents = async () => {
   try {
     const response = await API.get('/events');
-    return response.data || response; 
+    // Handle both direct array response and success-wrapped response
+    if (Array.isArray(response)) {
+      return response;
+    }
+    return response.data?.data || response.data || []; 
   } catch (error) {
     console.error('Error fetching events:', error);
-    throw error;
+    return [];
   }
 };
 

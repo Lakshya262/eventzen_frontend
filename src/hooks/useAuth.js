@@ -26,18 +26,19 @@ const useAuth = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          throw new Error('No token found');
-        }
+      setIsLoading(true);
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
 
-        // Only fetch profile if we don't have user data
-        if (!user) {
-          const userData = await authService.getProfile();
-          setUser(userData);
-          localStorage.setItem('user', JSON.stringify(userData));
-        }
+      try {
+        // Always verify token validity with backend
+        const userData = await authService.getProfile();
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
       } catch (error) {
         console.error('Auth check failed:', error);
         logout();
@@ -47,7 +48,7 @@ const useAuth = () => {
     };
 
     checkAuth();
-  }, [navigate, user]);
+  }, [navigate]);
 
   return { user, isLoading, login, logout };
 };

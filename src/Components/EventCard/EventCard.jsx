@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useAuth from '../../hooks/useAuth';
 import './EventCard.css';
 
-const EventCard = ({ event, onBookingSuccess }) => {
+const EventCard = ({ event, onBookingSuccess, onDelete }) => {
   const { user } = useAuth();
   const [isBooking, setIsBooking] = useState(false);
   const [bookingError, setBookingError] = useState(null);
@@ -75,14 +75,23 @@ const EventCard = ({ event, onBookingSuccess }) => {
           View Details
         </Link>
         
-        {user?.role === 'CUSTOMER' && event.available_seats > 0 && (
+        {user?.role === 'ADMIN' ? (
           <button
-            onClick={handleBookEvent}
-            disabled={isBooking || isBooked}
-            className={`btn-book ${isBooked ? 'booked' : ''}`}
+            onClick={() => onDelete(event.id)}
+            className="btn-delete"
           >
-            {isBooking ? 'Booking...' : isBooked ? 'Registered!' : 'Register Now'}
+            Delete Event
           </button>
+        ) : (
+          event.available_seats > 0 && (
+            <button
+              onClick={handleBookEvent}
+              disabled={isBooking || isBooked}
+              className={`btn-book ${isBooked ? 'booked' : ''}`}
+            >
+              {isBooking ? 'Booking...' : isBooked ? 'Registered!' : 'Register Now'}
+            </button>
+          )
         )}
       </div>
       
@@ -102,7 +111,8 @@ EventCard.propTypes = {
     available_seats: PropTypes.number.isRequired,
     createdAt: PropTypes.string
   }).isRequired,
-  onBookingSuccess: PropTypes.func
+  onBookingSuccess: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default EventCard;

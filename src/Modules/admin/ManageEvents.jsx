@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getEvents, createEvent, deleteEvent } from "../../services/eventServices";
 import "./AdminDashboard.css";
 
@@ -22,7 +23,7 @@ const ManageEvents = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const data = await eventService.getAllEvents();
+      const data = await getEvents();
       setEvents(data);
     } catch (err) {
       setError("Failed to load events");
@@ -46,12 +47,18 @@ const ManageEvents = () => {
     
     try {
       setLoading(true);
+      
+      // Validate date format
+      if (!formData.date_time || isNaN(new Date(formData.date_time))) {
+        throw new Error("Please enter a valid date and time");
+      }
+
       const eventToCreate = {
         ...formData,
         date_time: new Date(formData.date_time).toISOString()
       };
       
-      const newEvent = await eventService.createEvent(eventToCreate);
+      const newEvent = await createEvent(eventToCreate);
       setEvents([...events, newEvent]);
       
       setFormData({
@@ -74,7 +81,7 @@ const ManageEvents = () => {
     
     try {
       setLoading(true);
-      await eventService.deleteEvent(eventId);
+      await deleteEvent(eventId);
       setEvents(events.filter(event => event.id !== eventId));
     } catch (err) {
       setError("Failed to delete event");
@@ -94,6 +101,70 @@ const ManageEvents = () => {
       <form onSubmit={handleSubmit} className="event-form">
         <h3>Create New Event</h3>
         
+        <div className="form-group">
+          <label>Event Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Venue</label>
+          <input
+            type="text"
+            name="venue"
+            value={formData.venue}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Date & Time</label>
+          <input
+            type="datetime-local"
+            name="date_time"
+            value={formData.date_time}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Available Seats</label>
+          <input
+            type="number"
+            name="available_seats"
+            min="1"
+            value={formData.available_seats}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Vendor (Optional)</label>
+          <input
+            type="text"
+            name="vendor"
+            value={formData.vendor}
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Description (Optional)</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Event"}
         </button>

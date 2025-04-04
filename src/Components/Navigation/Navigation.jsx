@@ -8,10 +8,16 @@ const Navigation = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [role, setRole] = useState(user?.role || "");
+  const [role, setRole] = useState(user?.role?.toUpperCase() || "");
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   useEffect(() => {
-    setRole(user?.role || ""); 
+    console.log('Current user:', user); // Debug log
+    setRole(user?.role?.toUpperCase() || ""); 
   }, [user]);
 
   console.log("User Role in Navbar:", role);
@@ -35,8 +41,10 @@ const Navigation = () => {
               <div className="nav-links">
                 {role.toUpperCase() === "ADMIN" ? (
                   <>
-                    <NavLink to="/admin/manage-events">Manage Events</NavLink>
+                    <NavLink to="/admin/dashboard">Dashboard</NavLink>
+                    <NavLink to="/admin/events">Manage Events</NavLink>
                     <NavLink to="/admin/manage-attendees">Attendees</NavLink>
+                    <NavLink to="/manage-profile">Profile</NavLink>
                   </>
                 ) : (
                   <>
@@ -48,9 +56,6 @@ const Navigation = () => {
               </div>
 
               <div className="user-section">
-                <span className="welcome-message">
-                  Welcome, {user.name.split(" ")[0]}
-                </span>
                 <button 
                   onClick={handleLogout} 
                   className="logout-button"

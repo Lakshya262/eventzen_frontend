@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import authService from './authService';
 
 const api = {
   get: async (endpoint) => {

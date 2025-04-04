@@ -78,6 +78,11 @@ const authService = {
   logout: () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+  },
+
+  getAuthHeader: () => {
+    const token = localStorage.getItem("token");
+    return token ? { "Authorization": `Bearer ${token}` } : {};
   }
 };
 

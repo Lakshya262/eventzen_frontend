@@ -27,7 +27,7 @@ function Login() {
 
       
       if (response.role === "ADMIN") {
-        navigate("/admin-dashboard", { replace: true });
+        navigate("/admin/dashboard", { replace: true });
       } else {
         navigate("/customer-dashboard", { replace: true });
       }

@@ -20,28 +20,13 @@ function ManageProfile() {
           return;
         }
         
-        try {
-          const response = await axios.get("http://localhost:3000/api/auth/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          });
-          setUser(response.data);
-        } catch (err) {
-          console.error("Profile fetch error:", err);
-          setError(err.response?.data?.error || "Failed to load profile");
-          
-          if (err.response?.status === 401) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("role");
-            navigate("/login");
-          }
-        } finally {
-          setLoading(false);
-        }
-        
+        const response = await axios.get("http://localhost:3000/api/auth/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
         setUser(response.data);
       } catch (err) {
         console.error('Profile fetch error:', err);

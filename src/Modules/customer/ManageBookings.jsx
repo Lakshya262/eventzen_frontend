@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import eventService from "../../services/eventServices";
+import { getEventBookings, cancelBooking } from "../../services/eventServices";
 import "./styles/ManageBookings.css";
 
 const ManageBookings = () => {
@@ -17,7 +17,7 @@ const ManageBookings = () => {
           throw new Error("User not authenticated");
         }
         
-        const data = await eventService.getUserBookings(userId);
+        const data = await getEventBookings(userId);
         setBookings(data);
       } catch (err) {
         setError(err.message || "Failed to load bookings");
@@ -33,10 +33,10 @@ const ManageBookings = () => {
   const handleCancelBooking = async (bookingId) => {
     try {
       if (window.confirm("Are you sure you want to cancel this booking?")) {
-        await eventService.cancelBooking(bookingId);
+        await cancelBooking(bookingId);
         
         const userId = localStorage.getItem("userId");
-        const updatedBookings = await eventService.getUserBookings(userId);
+        const updatedBookings = await getEventBookings(userId);
         setBookings(updatedBookings);
       }
     } catch (err) {

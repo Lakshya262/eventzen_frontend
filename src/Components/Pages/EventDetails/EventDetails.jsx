@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import eventService from '../../../services/eventServices';
+import { getEventById, bookEvent } from '../../../services/eventServices';
 import './EventDetails.css';
 
 const EventDetails = () => {
@@ -12,7 +12,7 @@ const EventDetails = () => {
   React.useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const eventData = await eventService.getEventById(eventId);
+        const eventData = await getEventById(eventId);
         setEvent(eventData);
       } catch (err) {
         setError('Failed to fetch event details');

@@ -29,7 +29,7 @@ function Register() {
       console.log("Registration response:", response); // Debug log
       
       if (response.role === "ADMIN") {
-        navigate("/admin-dashboard");
+        navigate("/admin/dashboard");
       } else {
         navigate("/customer-dashboard");
       }

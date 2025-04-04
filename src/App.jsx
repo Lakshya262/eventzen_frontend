@@ -6,7 +6,8 @@ import EventsList from './Components/Pages/EventList/EventsList';
 import AdminDashboard from './Modules/admin/AdminDashboard';
 import ManageEvents from './Modules/admin/ManageEvents';
 import EventBookings from './Modules/admin/EventBookings';
-import CustomerDashboard from './Modules/customer/CustomerDashboard'; // Assuming this file exists
+import ManageAttendees from './Modules/admin/ManageAttendees';
+import CustomerDashboard from './Modules/customer/CustomerDashboard';
 import ManageProfile from './Components/ManageProfile/ManageProfile';
 import AuthGuard from './Components/AuthGuard';
 import Navigation from './Components/Navigation/Navigation';
@@ -46,6 +47,14 @@ function App() {
               element={
                 <AuthGuard requiredRole="ADMIN">
                   <EventBookings />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="manage-attendees"
+              element={
+                <AuthGuard requiredRole="ADMIN">
+                  <ManageAttendees />
                 </AuthGuard>
               }
             />
